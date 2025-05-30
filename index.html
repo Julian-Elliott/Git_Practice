@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Julian Elliott - Data Profile</title>
     <style>
+        /* === CSS CUSTOM PROPERTIES === */
+        :root {
+            --color-primary: #00ff00;
+            --color-secondary: #00cc00;
+            --color-tertiary: #009900;
+            --color-accent: #ff0080;
+            --color-info: #00ffff;
+            --color-bg-dark: #0f0f23;
+            --color-bg-mid: #1a1a2e;
+            --color-bg-light: #16213e;
+            --color-border: #333;
+            --font-mono: 'Courier New', monospace;
+            --max-width: 1400px;
+            --spacing-sm: 10px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            --border-radius: 50%;
+            --transition: all 0.3s ease;
+        }
+
+        /* === RESET & BASE === */
         * {
             margin: 0;
             padding: 0;
@@ -12,51 +34,44 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e);
-            color: #00ff00;
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-mid), var(--color-bg-light));
+            color: var(--color-primary);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
+        /* === LAYOUT === */
         .container {
-            max-width: 1400px;
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.1;
+            padding: var(--spacing-md);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            border: 2px solid #00ff00;
-            padding: 30px;
-            background: rgba(0, 255, 0, 0.05);
-            position: relative;
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-lg);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: var(--spacing-md);
         }
 
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* === PROFILE COMPONENTS === */
         .profile-image {
             width: 150px;
             height: 150px;
-            border-radius: 50%;
-            border: 3px solid #00ff00;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            border-radius: var(--border-radius);
             animation: profileGlow 3s ease-in-out infinite;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .profile-image:hover {
@@ -64,59 +79,21 @@
             box-shadow: 0 0 50px rgba(0, 255, 0, 0.8);
         }
 
-        @keyframes profileGlow {
-            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.5); }
-            50% { box-shadow: 0 0 50px rgba(0, 255, 0, 0.8), 0 0 70px rgba(0, 255, 0, 0.3); }
-        }
-
-        .header-content {
-            text-align: center;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ff00, #ff0080, #00ff00);
-            z-index: -1;
-            animation: borderGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes borderGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
         .profile-title {
             font-size: 3em;
-            text-shadow: 0 0 20px #00ff00;
-            margin-bottom: 10px;
-            animation: textGlow 2s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--color-primary);
+            margin-bottom: var(--spacing-sm);
             position: relative;
             overflow: hidden;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             letter-spacing: 0.1em;
-            background: linear-gradient(90deg, #00ff00, #00cc00, #009900, #00ff00);
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-tertiary), var(--color-primary));
             background-size: 200% 100%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            animation: matrixFlow 3s ease-in-out infinite, textGlow 2s ease-in-out infinite;
-        }
-
-        .profile-title::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.8), transparent);
-            animation: scan 4s infinite;
+            animation: matrixFlow 3s ease-in-out infinite;
         }
 
         .profile-title::after {
@@ -126,7 +103,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #00ff00, #00cc00);
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -137,46 +114,11 @@
             letter-spacing: 0.05em;
         }
 
-        @keyframes matrixFlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes scan {
-            0% { left: -100%; opacity: 0; }
-            50% { opacity: 1; }
-            100% { left: 100%; opacity: 0; }
-        }
-
-        @keyframes matrixGlitch {
-            0%, 90%, 100% { opacity: 0; }
-            91%, 99% { opacity: 0.8; }
-        }
-
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 20px #00ff00; }
-            50% { text-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; }
-        }
-
-        .data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .interesting-fact {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
+        /* === DATA CARDS === */
         .data-card {
-            border: 1px solid #00ff00;
-            padding: 20px;
+            padding: var(--spacing-md);
             background: rgba(0, 255, 0, 0.02);
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
@@ -188,7 +130,7 @@
 
         .card-title {
             font-size: 1.5em;
-            color: #ff0080;
+            color: var(--color-accent);
             margin-bottom: 15px;
             text-transform: uppercase;
         }
@@ -196,221 +138,17 @@
         .metric {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: var(--spacing-sm);
             padding: 5px 0;
-            border-bottom: 1px dotted #333;
+            border-bottom: 1px dotted var(--color-border);
         }
 
         .metric-value {
-            color: #00ffff;
+            color: var(--color-info);
             font-weight: bold;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #1a1a2e;
-            border: 1px solid #00ff00;
-            margin: 10px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #00ff00, #ff0080);
-            transition: width 2s ease;
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .code-block {
-            background: #0a0a0a;
-            border: 1px solid #333;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            position: relative;
-        }
-
-        .code-block::before {
-            content: '> ';
-            color: #ff0080;
-        }
-
-        .chart {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(to top, #0f0f23 0%, #1a1a2e 100%);
-            border: 1px solid #00ff00;
-            position: relative;
-            margin: 20px 0;
-            display: flex;
-            align-items: end;
-            padding: 10px;
-        }
-
-        .bar {
-            flex: 1;
-            margin: 0 2px;
-            background: linear-gradient(to top, #00ff00, #ff0080);
-            min-height: 20px;
-            animation: growUp 2s ease;
-            position: relative;
-        }
-
-        @keyframes growUp {
-            from { height: 0; }
-        }
-
-        .bar::after {
-            content: attr(data-value);
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            color: #00ffff;
-        }
-
-        .terminal {
-            background: #000;
-            border: 2px solid #00ff00;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            border-radius: 10px;
-        }
-
-        .terminal-header {
-            color: #ff0080;
-            margin-bottom: 10px;
-        }
-
-        .terminal-line {
-            margin: 5px 0;
-            animation: typewriter 3s steps(50) infinite;
-        }
-
-        .cursor {
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .data-matrix {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 5px;
-            margin: 20px 0;
-        }
-
-        .data-cell {
-            aspect-ratio: 1;
-            border: 1px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            background: rgba(0, 255, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .data-cell:hover {
-            background: rgba(255, 0, 128, 0.3);
-            transform: scale(1.1);
-        }
-
-        .network-graph {
-            width: 100%;
-            height: 300px;
-            position: relative;
-            border: 1px solid #00ff00;
-            background: radial-gradient(circle at center, #1a1a2e, #0f0f23);
-            overflow: hidden;
-        }
-
-        .node {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #00ff00;
-            box-shadow: 0 0 10px #00ff00;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .connection {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, #00ff00, #ff0080);
-            transform-origin: left;
-            animation: dataFlow 3s infinite;
-        }
-
-        @keyframes dataFlow {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        .stats-ticker {
-            background: #000;
-            color: #00ff00;
-            padding: 10px;
-            margin: 20px 0;
-            border: 1px solid #00ff00;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .ticker-content {
-            display: inline-block;
-            animation: scroll-left 20s linear infinite;
-        }
-
-        @keyframes scroll-left {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        .glitch {
-            animation: glitch 0.3s infinite;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
+        /* === BINARY RAIN EFFECT === */
         .binary-rain {
             position: fixed;
             top: 0;
@@ -424,15 +162,53 @@
         .binary-column {
             position: absolute;
             top: -100%;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
+            color: var(--color-primary);
+            font-family: var(--font-mono);
             font-size: 14px;
             opacity: 0.1;
             animation: fall linear infinite;
         }
 
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            border-top: 1px solid var(--color-primary);
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes profileGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(0, 255, 0, 0.8), 0 0 70px rgba(0, 255, 0, 0.3); }
+        }
+
+        @keyframes matrixFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes matrixGlitch {
+            0%, 90%, 100% { opacity: 0; }
+            91%, 99% { opacity: 0.8; }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
         @keyframes fall {
             to { top: 100%; }
+        }
+
+        /* === UTILITY CLASSES === */
+        .glitch {
+            animation: glitch 0.3s infinite;
         }
     </style>
 </head>
@@ -444,17 +220,43 @@
             <img src="https://avatars.githubusercontent.com/u/87040929?v=4" alt="Julian Elliott" class="profile-image">
             <div class="header-content">
                 <h1 class="profile-title glitch">JULIAN ELLIOTT</h1>
-                <p> JUNIOR DATA ANALYST</p>
             </div>
         </header>
 
-        <div class="interesting-fact">
-            <h1> My Interesting fact:</h1>
-            <p> My laptop and phone are exclusively powered by solar power</p>
-        </div>
+        <main class="data-grid">
+            <article class="data-card">
+                <h3 class="card-title">ROLE SPECIFICATIONS</h3>
+                <div class="metric">
+                    <span>💼 Position</span>
+                    <span class="metric-value">Junior Data Analyst</span>
+                </div>
+                <div class="metric">
+                    <span>📊 Specialization</span>
+                    <span class="metric-value">Data Analysis & Visualization</span>
+                </div>
+                <div class="metric">
+                    <span>🎯 Status</span>
+                    <span class="metric-value">Active & Learning</span>
+                </div>
+            </article>
 
-        <div class="data-grid">
-            <div class="data-card">
+            <article class="data-card">
+                <h3 class="card-title">POWER SOURCE</h3>
+                <div class="metric">
+                    <span>🔋 Energy Type</span>
+                    <span class="metric-value">100% Solar Powered</span>
+                </div>
+                <div class="metric">
+                    <span>💻 Devices</span>
+                    <span class="metric-value">Laptop + Phone</span>
+                </div>
+                <div class="metric">
+                    <span>🌱 Carbon Footprint</span>
+                    <span class="metric-value">Net Zero</span>
+                </div>
+            </article>
+
+            <article class="data-card">
                 <h3 class="card-title">CONTACT PROTOCOLS</h3>
                 <div class="metric">
                     <span>📧 Email</span>
@@ -476,51 +278,81 @@
                     <span>📍 Location</span>
                     <span class="metric-value">West Midlands, UK</span>
                 </div>
-            </div>
-        </div>
+            </article>
+        </main>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #00ff00;">
+        <footer class="footer">
             <p>© 2025 Julian Elliott Data Systems | Version 2.5.1 | Build #847392</p>
             <p>Powered by caffeine, curiosity, and clean code</p>
         </footer>
     </div>
 
     <script>
+        'use strict';
+
+        // Configuration constants
+        const CONFIG = {
+            BINARY_COLUMNS: 50,
+            BINARY_ROWS: 20,
+            ANIMATION_DURATION_RANGE: [2, 5],
+            ANIMATION_DELAY_RANGE: [0, 2]
+        };
+
+        // Utility functions
+        const randomBetween = (min, max) => Math.random() * (max - min) + min;
+        const randomChoice = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
         // Binary rain effect
         function createBinaryRain() {
             const rain = document.getElementById('binaryRain');
-            const chars = ['0', '1'];
+            const fragment = document.createDocumentFragment();
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < CONFIG.BINARY_COLUMNS; i++) {
                 const column = document.createElement('div');
                 column.className = 'binary-column';
-                column.style.left = Math.random() * 100 + '%';
-                column.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                column.style.animationDelay = Math.random() * 2 + 's';
                 
-                let text = '';
-                for (let j = 0; j < 20; j++) {
-                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
-                }
-                column.innerHTML = text;
-                rain.appendChild(column);
+                // Set random properties
+                Object.assign(column.style, {
+                    left: `${Math.random() * 100}%`,
+                    animationDuration: `${randomBetween(...CONFIG.ANIMATION_DURATION_RANGE)}s`,
+                    animationDelay: `${randomBetween(...CONFIG.ANIMATION_DELAY_RANGE)}s`
+                });
+                
+                // Generate binary content
+                column.innerHTML = Array(CONFIG.BINARY_ROWS)
+                    .fill()
+                    .map(() => randomChoice(['0', '1']))
+                    .join('<br>');
+                
+                fragment.appendChild(column);
             }
+            
+            rain.appendChild(fragment);
         }
 
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', () => {
-            createBinaryRain();
-        });
+        // Event handlers
+        const handleCardHover = (e, isEntering) => {
+            const card = e.target.closest('.data-card');
+            if (card) {
+                card.style.filter = isEntering ? 'hue-rotate(90deg)' : 'none';
+            }
+        };
 
-        // Glitch effect on hover
-        document.querySelectorAll('.data-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.filter = 'hue-rotate(90deg)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.filter = 'none';
-            });
-        });
+        // Initialize application
+        function init() {
+            createBinaryRain();
+            
+            // Set up event listeners with passive option for better performance
+            document.addEventListener('mouseover', (e) => handleCardHover(e, true), { passive: true });
+            document.addEventListener('mouseout', (e) => handleCardHover(e, false), { passive: true });
+        }
+
+        // Start the application when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
