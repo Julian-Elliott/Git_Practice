@@ -43,6 +43,34 @@
             padding: 30px;
             background: rgba(0, 255, 0, 0.05);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            animation: profileGlow 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.8);
+        }
+
+        @keyframes profileGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(0, 255, 0, 0.8), 0 0 70px rgba(0, 255, 0, 0.3); }
+        }
+
+        .header-content {
+            text-align: center;
         }
 
         .header::before {
@@ -131,6 +159,13 @@
         }
 
         .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .interesting-fact {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
@@ -406,13 +441,17 @@
     
     <div class="container">
         <header class="header">
-            <h1 class="profile-title glitch">JULIAN ELLIOTT</h1>
-            <p>DATA ANALYST | MACHINE LEARNING ENGINEER | CODE ARCHITECT</p>
-            <div class="code-block">
-                System.initialize("JulianElliott_v2.5.1");<br>
-                Status: ONLINE | Uptime: 99.97% | Last Update: 2025-05-30
+            <img src="https://avatars.githubusercontent.com/u/87040929?v=4" alt="Julian Elliott" class="profile-image">
+            <div class="header-content">
+                <h1 class="profile-title glitch">JULIAN ELLIOTT</h1>
+                <p> JUNIOR DATA ANALYST</p>
             </div>
         </header>
+
+        <div class="interesting-fact">
+            <h1> My Interesting fact:</h1>
+            <p> My laptop and phone are exclusively powered by solar power</p>
+        </div>
 
         <div class="data-grid">
             <div class="data-card">
